@@ -1,11 +1,15 @@
 require 'features_helper'
 
 describe 'List books' do
-  it 'displays each book on the page' do
-    visit '/books'
+  before do
+    BookRepository.clear
 
-    within '#books' do
-      assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
-    end
+    BookRepository.create(Book.new(title: 'PoEEA', author: 'Martin Fowler'))
+    BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+  end
+
+  it 'shows a book element for each book' do
+    visit '/books'
+    assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
   end
 end
