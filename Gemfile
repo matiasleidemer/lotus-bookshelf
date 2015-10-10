@@ -15,3 +15,7 @@ end
 group :production do
   # gem 'puma'
 end
+
+group :test, :development do
+  gem 'pry'
+end
